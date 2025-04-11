@@ -1,0 +1,415 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "BITS SES Assignment - Smart energy monitor",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fei3ptohapzwgf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "displayName": "Watts",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "maxDataPoints": 10000,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "query": "from(bucket: \"SMARTENERGY\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r.channel == \"2\" and r._field == \"power_W\")\n  |> yield(name: \"_results\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Power Ch - 2",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fei3ptohapzwgf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "displayName": "Watts",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 5,
+        "y": 0
+      },
+      "id": 7,
+      "maxDataPoints": 10000,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "query": "from(bucket: \"SMARTENERGY\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r.channel == \"4\" and r._field == \"power_W\")\n  |> yield(name: \"_results\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Power Ch - 4",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fei3ptohapzwgf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "displayName": "Watts",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 10,
+        "y": 0
+      },
+      "id": 8,
+      "maxDataPoints": 10000,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "query": "from(bucket: \"SMARTENERGY\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r.channel == \"6\" and r._field == \"power_W\")\n  |> yield(name: \"_results\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Power Ch- 6",
+      "type": "gauge"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 16,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "alertInstanceLabelFilter": "",
+        "alertName": "",
+        "dashboardAlerts": false,
+        "datasource": "-- Grafana --",
+        "folder": {
+          "title": "Channel Alerts",
+          "uid": "ceidbjtvbnny8f"
+        },
+        "groupBy": [],
+        "groupMode": "default",
+        "maxItems": 20,
+        "showInactiveAlerts": false,
+        "sortOrder": 1,
+        "stateFilter": {
+          "error": true,
+          "firing": true,
+          "noData": false,
+          "normal": false,
+          "pending": true
+        },
+        "viewMode": "list"
+      },
+      "pluginVersion": "11.6.0",
+      "title": "System Alert",
+      "type": "alertlist"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fei3ptohapzwgf"
+      },
+      "description": "Individual Current",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Current (mA)",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 6
+      },
+      "id": 1,
+      "maxDataPoints": 10000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fei3ptohapzwgf"
+          },
+          "query": "from(bucket: \"SMARTENERGY\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r._field == \"scaled_value\")\n  |> yield(name: \"_results\")\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Line Current",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fei3ptohapzwgf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 6
+      },
+      "id": 2,
+      "maxDataPoints": 10000,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.6.0",
+      "targets": [
+        {
+          "query": "from(bucket: \"SMARTENERGY\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r._field == \"energy_kWh\")\n  |> yield(name: \"_results\")\n\n\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Energy Consumption",
+      "type": "gauge"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Bits-EnergyMonitor",
+  "uid": "fei3rde1ut81sd",
+  "version": 38
+}

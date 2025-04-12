@@ -74,6 +74,13 @@ void logToInfluxDB(int channel, int value, float scaledValue, float power, float
         if (res != CURLE_OK) {
             fprintf(stderr, "Curl failed: %s\n", curl_easy_strerror(res));
         }
+        long http_code = 0;
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+ 
+        if (http_code != 204) {
+            fprintf(stderr, "InfluxDB write failed (HTTP %ld)\n", http_code);
+            fprintf(stderr, "Posted data:\n%s\n", postData);
+        }
 
         curl_easy_cleanup(curl);
     }

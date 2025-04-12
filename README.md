@@ -14,12 +14,15 @@ This project reads analog data from GPIO pins on a Raspberry Pi, processes it, a
 - WiringPi library
 - InfluxDB
 - CURL library
+- InfluxDB
+- Grafana
 
 ## Installation
 
 1. **Install WiringPi:**
    ```bash
    sudo apt-get update
+   sudo apt upgrade
    sudo apt-get install wiringpi
    ```
 
@@ -33,6 +36,19 @@ This project reads analog data from GPIO pins on a Raspberry Pi, processes it, a
    git clone <repository_url>
    cd <repository_name>
    ```
+4. **Install Grafana:**
+   ```bash
+   echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
+   curl https://packages.grafana.com/gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/grafana-archive-keyring.gpg
+   sudo apt update
+   sudo apt install grafana -y
+   
+5. **Install InfluxDB:**
+   ```bash
+   curl https://repos.influxdata.com/influxdata-archive.key | gpg --dearmor | sudo tee /usr/share/keyrings/influxdb-archive-keyring.gpg > /dev/null   //Add the InfluxDB Repository
+   echo "deb [signed-by=/usr/share/keyrings/influxdb-archive-keyring.gpg] https://repos.influxdata.com/debian stable main" | sudo tee /etc/apt/sources.list.d/influxdb.list   //Add the Repository to the Sources List
+   sudo apt install influxdb2  //Install InfluxDB
+   
 
 ## Usage
 
@@ -43,7 +59,20 @@ This project reads analog data from GPIO pins on a Raspberry Pi, processes it, a
 
 2. **Run the program:**
    ```bash
-   sudo ./mcp3008
+   sudo systemctl start grafana-server  \\Start Grafana server
+   sudo systemctl enable grafana-server \\Enable Grafana server
+   sudo systemctl status influxdb \\ Check Grafana Status
+   
+   sudo systemctl start influxdb  \\Start Influx Server
+   sudo systemctl enable influxdb \\Enable Influx Server
+   sudo systemctl status influxdb \\ Check Influx Db status
+   sudo ./mcp3008  \\ Run C Program
+
+   /*
+   Once installed,
+   you can access Grafana's web interface by navigating to http://<your-raspberry-pi-ip>:3000 in your browser
+   you can configure InfluxDB by accessing its web interface at http://<your-raspberry-pi-ip>:8086
+   */
    ```
 
 ## Code Breakdown

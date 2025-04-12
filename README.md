@@ -38,12 +38,12 @@ This project reads analog data from GPIO pins on a Raspberry Pi, processes it, a
 
 1. **Compile the code:**
    ```bash
-   gcc -o analog_data_logger analog_data_logger.c -lwiringPi -lcurl
+   gcc -o mcp3008 mcp3008.c -lwiringPi -lcurl
    ```
 
 2. **Run the program:**
    ```bash
-   sudo ./analog_data_logger
+   sudo ./mcp3008
    ```
 
 ## Code Breakdown
@@ -139,7 +139,12 @@ void logToInfluxDB(int channel, int value, float scaledValue, float power, float
         if (res != CURLE_OK) {
             fprintf(stderr, "Curl failed: %s\n", curl_easy_strerror(res));
         }
-
+         long http_code = 0;
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+        if (http_code != 204) {
+            fprintf(stderr, "InfluxDB write failed (HTTP %ld)\n", http_code);
+            fprintf(stderr, "Posted data:\n%s\n", postData);
+        }
         curl_easy_cleanup(curl);
     }
 }

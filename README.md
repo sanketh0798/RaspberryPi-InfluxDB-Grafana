@@ -206,10 +206,6 @@ int main() {
 ```
 - **Purpose:** Initializes WiringPi and SPI, reads ADC values from channels 2, 4, and 6, scales the values, calculates power and energy, logs the data to InfluxDB, and prints the values to the console.
 
-## License
-
-This project is licensed under the MIT License.
-
 ---
 
 Feel free to adjust the `README.md` file as needed. Let me know if you need any further assistance!
